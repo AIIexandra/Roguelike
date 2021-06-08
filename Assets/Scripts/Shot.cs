@@ -10,12 +10,6 @@ public class Shot : MonoBehaviour
     public AudioClip shot;
 
 
-
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
