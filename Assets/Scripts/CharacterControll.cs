@@ -10,10 +10,14 @@ public class CharacterControll : MonoBehaviour
     private Vector3 moveDir = Vector3.zero;
     private CharacterController controller;
 
+    public float currentHealthPlayer = 50;  //здоровье
+
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void FixedUpdate()
@@ -32,5 +36,14 @@ public class CharacterControll : MonoBehaviour
 
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
+    }
+    public void DamagePlayer(float damageAmount)
+    {
+        currentHealthPlayer -= damageAmount;
+
+        if (currentHealthPlayer <= 0)
+        {
+            //Destroy(gameObject);
+        }
     }
 }

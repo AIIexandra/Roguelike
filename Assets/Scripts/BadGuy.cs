@@ -10,7 +10,9 @@ public class BadGuy : MonoBehaviour
     public GameObject player;
     public float distance;
     NavMeshAgent nav;
-    public float radius = 15;
+    public float radius = 15;    //радиус обзора врагов
+    //public ParticleSystem explosionEffect;
+    //public GameObject explosionEffect;
 
     void Start()
     {
@@ -21,7 +23,7 @@ public class BadGuy : MonoBehaviour
     {
         distance = Vector3.Distance(player.transform.position, transform.position);
 
-        if(distance > radius || distance < 2)
+        if(distance > radius)
         {
             nav.enabled = false;
         }
@@ -40,7 +42,11 @@ public class BadGuy : MonoBehaviour
         if(currentHealth <= 0)
         {
             //gameObject.SetActive(false);
-            Destroy(gameObject);        
+            //GameObject impact = Instantiate(explosionEffect, explosionEffect.transform.position, Quaternion.identity);
+            //Destroy(impact, 1f);
+
+            Destroy(gameObject);
+            //explosionEffect.Play();
         }
     }
 }

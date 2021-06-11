@@ -12,11 +12,12 @@ public class Shot3 : MonoBehaviour
 
     public Transform spawnLaser;
     Camera cam;
-    WaitForSeconds laserDuration = new WaitForSeconds(0.05f);  //время отрисгвки лазера
+    WaitForSeconds laserDuration = new WaitForSeconds(0.05f);  //время отрисовки лазера
     public AudioSource shotSound;  //звук выстрела
     LineRenderer laserLine;
 
     public GameObject hitEffect;   //эффект после выстрела
+    public GameObject explosionEffect;   //эффект после убийства
 
     void Start()
     {
@@ -41,12 +42,18 @@ public class Shot3 : MonoBehaviour
                 laserLine.SetPosition(1, hit.point);
                 BadGuy health = hit.collider.GetComponent<BadGuy>();
 
-                if (health != null)
+                if (health != null) 
                 {
                     health.Damage(damage);
 
                     GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-                    Destroy(impact, 2f);
+                    Destroy(impact, 1f);
+
+                    if (health.currentHealth <= 0)
+                    {
+                        impact = Instantiate(explosionEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                        Destroy(impact, 1f);
+                    }
                 }
             }
 
