@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Shot3 : MonoBehaviour
+public class ShotPlayer : MonoBehaviour
 {
 
     public float damage = 25f;     //урон от выстрела
@@ -18,6 +19,8 @@ public class Shot3 : MonoBehaviour
 
     public GameObject hitEffect;   //эффект после выстрела
     public GameObject explosionEffect;   //эффект после убийства
+
+    public Slider badGuyBar;
 
     void Start()
     {
@@ -45,6 +48,7 @@ public class Shot3 : MonoBehaviour
                 if (health != null) 
                 {
                     health.Damage(damage);
+                    badGuyBar.value = health.currentHealth;
 
                     GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     Destroy(impact, 1f);

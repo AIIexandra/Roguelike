@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShotBadGuy : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class ShotBadGuy : MonoBehaviour
             RaycastHit hit;
             laserLine.SetPosition(0, spawnLaser.transform.position);
 
-            if (Physics.Raycast(new Vector3(0, 0, 1), gameObject.transform.forward, out hit, distance))
+            if (Physics.Raycast(spawnLaser.transform.position, spawnLaser.transform.forward, out hit, distance))
             {
                 laserLine.SetPosition(1, hit.point);
                 CharacterControll health = hit.collider.GetComponent<CharacterControll>();
@@ -38,6 +39,7 @@ public class ShotBadGuy : MonoBehaviour
                 if (health != null)
                 {
                     health.DamagePlayer(damage);
+                    Debug.Log("Попал");
                     
                     if (health.currentHealthPlayer <= 0)
                     {
