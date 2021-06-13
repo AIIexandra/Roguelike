@@ -7,12 +7,14 @@ public class ShotBadGuy : MonoBehaviour
 {
     public float damage = 10f;       //урон от выстрела
     public float fireRate = 3f;      //время между выстрелами
-    float nextFire;                  //игровое время
+    float nextFire = 3;                  //игровое время
     public float distance = 100;     //дальность выстрела
 
     public Transform spawnLaser;
     WaitForSeconds laserDuration = new WaitForSeconds(0.1f);  //время отрисовки лазера
     LineRenderer laserLine;
+
+    public AudioSource shotHit;  //звук попадания по игроку
 
     void Start()
     {
@@ -27,7 +29,6 @@ public class ShotBadGuy : MonoBehaviour
             nextFire = Time.time + fireRate;
             StartCoroutine(ShotEffect());
 
-            //Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
             RaycastHit hit;
             laserLine.SetPosition(0, spawnLaser.transform.position);
 
@@ -39,7 +40,7 @@ public class ShotBadGuy : MonoBehaviour
                 if (health != null)
                 {
                     health.DamagePlayer(damage);
-                    Debug.Log("Попал");
+                    shotHit.Play();
                     
                     if (health.currentHealthPlayer <= 0)
                     {

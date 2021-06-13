@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterControll : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CharacterControll : MonoBehaviour
     private CharacterController controller;
 
     public float currentHealthPlayer = 50;  //здоровье
+    public Slider healthBar;
 
 
     void Start()
@@ -18,6 +20,8 @@ public class CharacterControll : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        healthBar.maxValue = currentHealthPlayer;
     }
 
     void FixedUpdate()
@@ -40,6 +44,7 @@ public class CharacterControll : MonoBehaviour
     public void DamagePlayer(float damageAmount)
     {
         currentHealthPlayer -= damageAmount;
+        healthBar.value = currentHealthPlayer;
 
         if (currentHealthPlayer <= 0)
         {

@@ -2,21 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class BadGuy : MonoBehaviour
 {
     public float currentHealth = 50;  //здоровье
+    public float maxHealth = 50;
 
     public GameObject player;
     public float distance;
     NavMeshAgent nav;
     public float radius = 15;    //радиус обзора врагов
-    //public ParticleSystem explosionEffect;
-    //public GameObject explosionEffect;
+
+    public HealhBar healhBar;
+
+    public Slider slider;  //эталонный слайдер
+    Slider sliderHealth;   //создаваемый слайдер
+    public Canvas canvasHealthBar;   //родитель для слайдера
+    public Vector3 offset; //смещение для слайдера
+
 
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
+        currentHealth = maxHealth;
+
+        sliderHealth = Instantiate(slider);   //создать слайдер
+        sliderHealth.transform.SetParent(canvasHealthBar.transform, true);   //прикрепить слайдер к канвасу
+        sliderHealth.transform.position = canvasHealthBar.transform.position + offset;  //сместить слайдер
+        sliderHealth.transform.rotation = canvasHealthBar.transform.rotation;
+        sliderHealth.value = maxHealth;
     }
 
     void FixedUpdate()
@@ -38,15 +53,11 @@ public class BadGuy : MonoBehaviour
     public void Damage(float damageAmount)
     {
         currentHealth -= damageAmount;
+        sliderHealth.value = currentHealth;
 
         if(currentHealth <= 0)
-        {
-            //gameObject.SetActive(false);
-            //GameObject impact = Instantiate(explosionEffect, explosionEffect.transform.position, Quaternion.identity);
-            //Destroy(impact, 1f);
-
+        {            
             Destroy(gameObject);
-            //explosionEffect.Play();
         }
     }
 }
