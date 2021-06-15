@@ -6,16 +6,17 @@ using UnityEngine.UI;
 
 public class BadGuy : MonoBehaviour
 {
+    [Header("Health")]
     public float currentHealth = 50;  //здоровье
     public float maxHealth = 50;
 
+    [Header("Follow")]
     public GameObject player;
     public float distance;
     NavMeshAgent nav;
     public float radius = 15;    //радиус обзора врагов
 
-    public HealhBar healhBar;
-
+    [Header("Health bar")]
     public Slider slider;  //эталонный слайдер
     Slider sliderHealth;   //создаваемый слайдер
     public Canvas canvasHealthBar;   //родитель для слайдера
