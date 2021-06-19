@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool isClean = false;
+    public Door door;
+
     void Start()
+    {
+        GameObject d = GameObject.Find("Door");
+        door = d.GetComponent<Door>();
+    }
+
+
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerStay(Collider other)
     {
-        
+        if (other.tag == "Enemy") isClean = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player") door.CloseDoors();
     }
 }

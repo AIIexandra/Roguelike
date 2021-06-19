@@ -22,11 +22,17 @@ public class ShotPlayer : MonoBehaviour
 
     public Slider badGuyBar;
 
+    int countKill = 0;
+    Room room;
+
     void Start()
     {
         shotSound = GetComponent<AudioSource>();
         cam = GetComponentInChildren<Camera>();
         laserLine = GetComponent<LineRenderer>();
+
+        GameObject r = GameObject.Find("Room");
+        room = r.GetComponent<Room>();
     }
 
     void Update()
@@ -57,6 +63,14 @@ public class ShotPlayer : MonoBehaviour
                     {
                         impact = Instantiate(explosionEffect, hit.point, Quaternion.LookRotation(hit.normal));
                         Destroy(impact, 1f);
+
+                        countKill++;
+
+                        if(countKill == 4)
+                        {
+                            countKill = 0;
+                            room.isClean = true;
+                        }
                     }
                 }
             }

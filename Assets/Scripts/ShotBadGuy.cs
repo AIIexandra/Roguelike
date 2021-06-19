@@ -44,7 +44,7 @@ public class ShotBadGuy : MonoBehaviour
                     
                     if (health.currentHealthPlayer <= 0)
                     {
-                       //die
+                       //my die
                     }
                 }
             }
