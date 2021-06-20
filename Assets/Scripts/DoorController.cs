@@ -9,7 +9,7 @@ public class DoorController : MonoBehaviour
 
     void Start()
     {
-        GameObject r = GameObject.Find("Room");
+        GameObject r = GameObject.Find("1");
         room = r.GetComponent<Room>();
     }
 

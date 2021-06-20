@@ -9,11 +9,6 @@ public class Door : MonoBehaviour
     [SerializeField] float speed;
     public bool isOpen;
 
-    void Start()
-    {
-
-    }
-
     void FixedUpdate()
     {
         if (isOpen) OpenDoors();

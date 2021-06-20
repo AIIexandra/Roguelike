@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public bool isClean = false;
+    public bool isClean = true;
     public Door door;
+    public Door[] doors; 
 
     void Start()
     {
-        GameObject d = GameObject.Find("Door");
-        door = d.GetComponent<Door>();
-    }
+        GameObject[] go = GameObject.FindGameObjectsWithTag("Door");
 
-
-    void Update()
-    {
-        
+        for (int i = 0; i < doors.Length; i++)
+            doors[i] = go[i + ((int.Parse(gameObject.name) - 1) * 4)].GetComponent<Door>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -26,6 +23,8 @@ public class Room : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") door.CloseDoors();
+        if (other.tag == "Player" && isClean == false)
+            for (int i = 0; i < doors.Length; i++)
+                doors[i].isOpen = false;
     }
 }

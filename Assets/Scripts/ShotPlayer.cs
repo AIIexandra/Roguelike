@@ -31,7 +31,7 @@ public class ShotPlayer : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
         laserLine = GetComponent<LineRenderer>();
 
-        GameObject r = GameObject.Find("Room");
+        GameObject r = GameObject.Find("1");
         room = r.GetComponent<Room>();
     }
 

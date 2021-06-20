@@ -10,20 +10,22 @@ public class RoomGeneration : MonoBehaviour
 
     private Room[,] spawnedRooms;
 
+    int numberRoom = 1;
+
     void Start()
     {
         spawnedRooms = new Room[11, 11];
         spawnedRooms[5, 5] = startingRoom;
 
-        for (int i = 0; i < 12; i++)
-        {
+        for (int i = 0; i < 9; i++)
             GenerationOneRoom();
-        }
     }
 
     void GenerationOneRoom()
     {
         HashSet<Vector2Int> vacantGener = new HashSet<Vector2Int>();
+
+        numberRoom++;
 
         for (int x = 0; x < spawnedRooms.GetLength(0); x++)
         {
@@ -44,6 +46,7 @@ public class RoomGeneration : MonoBehaviour
         Room newRoom = Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)]);
         Vector2Int position = vacantGener.ElementAt(Random.Range(0, vacantGener.Count));
         newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 30;
+        newRoom.name = numberRoom.ToString();
 
         spawnedRooms[position.x, position.y] = newRoom;
     }
