@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class BadGuy : MonoBehaviour
+public class ExplosionGuy : MonoBehaviour
 {
     [Header("Health")]
     public float currentHealth = 50;  //здоровье
@@ -22,7 +22,6 @@ public class BadGuy : MonoBehaviour
     public Canvas canvasHealthBar;   //родитель для слайдера
     public Vector3 offset; //смещение для слайдера
 
-
     void Start()
     {
         player = GameObject.Find("Player");
@@ -34,7 +33,6 @@ public class BadGuy : MonoBehaviour
         sliderHealth.transform.SetParent(canvasHealthBar.transform, true);   //прикрепить слайдер к канвасу
         sliderHealth.transform.position = canvasHealthBar.transform.position + offset;  //сместить слайдер
         sliderHealth.transform.rotation = canvasHealthBar.transform.rotation;
-        sliderHealth.maxValue = maxHealth;
         sliderHealth.value = maxHealth;
     }
 
@@ -42,7 +40,7 @@ public class BadGuy : MonoBehaviour
     {
         distance = Vector3.Distance(player.transform.position, transform.position);
 
-        if(distance > radius)
+        if (distance > radius)
         {
             nav.enabled = false;
         }
@@ -53,14 +51,14 @@ public class BadGuy : MonoBehaviour
             nav.SetDestination(player.transform.position);
         }
     }
-    
+
     public void Damage(float damageAmount)
     {
         currentHealth -= damageAmount;
         sliderHealth.value = currentHealth;
 
-        if(currentHealth <= 0)
-        {            
+        if (currentHealth <= 0)
+        {
             Destroy(gameObject);
         }
     }
