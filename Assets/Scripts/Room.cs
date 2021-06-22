@@ -6,10 +6,12 @@ public class Room : MonoBehaviour
 {
     public bool isClean = true;
     public Door door;
-    public Door[] doors; 
+    public Door[] doors;
+    int i = 0;
 
     void Start()
     {
+        isClean = true;
         GameObject[] go = GameObject.FindGameObjectsWithTag("Door");
 
         for (int i = 0; i < doors.Length; i++)
@@ -18,7 +20,9 @@ public class Room : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Enemy") isClean = false;
+        if (other.tag == "Enemy" && i > 500)
+            isClean = false;
+        i++;
     }
 
     private void OnTriggerEnter(Collider other)

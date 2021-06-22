@@ -66,7 +66,7 @@ public class ShotPlayer : MonoBehaviour
 
                         countKill++;
 
-                        if(countKill == 4)
+                        if (countKill == 4)
                         {
                             countKill = 0;
                             room.isClean = true;
@@ -88,5 +88,11 @@ public class ShotPlayer : MonoBehaviour
         laserLine.enabled = true;
         yield return laserDuration;
         laserLine.enabled = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Room")
+            room = other.gameObject.GetComponent<Room>();
     }
 }

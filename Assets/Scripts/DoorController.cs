@@ -29,4 +29,10 @@ public class DoorController : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Room")
+            room = other.gameObject.GetComponent<Room>();
+    }
 }
