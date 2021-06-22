@@ -22,8 +22,8 @@ public class ShotPlayer : MonoBehaviour
 
     public Slider badGuyBar;
 
-    int countKill = 0;
-    Room room;
+    public int countKill = 0;
+    public Room room;
 
     void Start()
     {

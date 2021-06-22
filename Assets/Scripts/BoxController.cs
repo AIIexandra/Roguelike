@@ -13,7 +13,12 @@ public class BoxController : MonoBehaviour
     public Text textCoin;
     public Text textCoins;
 
-    int coins;
+    int prefsCoins;
+
+    private void Start()
+    {
+        prefsCoins = PlayerPrefs.GetInt("coins");
+    }
 
     void Update()
     {
@@ -58,6 +63,9 @@ public class BoxController : MonoBehaviour
                 }
             }
         }
+
+        prefsCoins = PlayerPrefs.GetInt("coins");
+        textCoins.text = prefsCoins.ToString();
     }
 
     IEnumerator WaitHealth()
@@ -84,14 +92,14 @@ public class BoxController : MonoBehaviour
         textHealth.text = "";
     }
 
-    IEnumerator WaitCoin()
+    public IEnumerator WaitCoin()
     {
         int add = Random.Range(20, 60);
-        coins += add;
+        prefsCoins += add;
         textCoin.text = $"+{add}";
-        textCoins.text = coins.ToString();
+        PlayerPrefs.SetInt("coins", prefsCoins);
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSecondsRealtime(2f);
         textCoin.text = "";
     }
 }

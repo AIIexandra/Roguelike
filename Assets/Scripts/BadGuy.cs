@@ -22,6 +22,7 @@ public class BadGuy : MonoBehaviour
     public Canvas canvasHealthBar;   //родитель для слайдера
     public Vector3 offset; //смещение для слайдера
 
+    public GameObject coins;
 
     void Start()
     {
@@ -60,7 +61,8 @@ public class BadGuy : MonoBehaviour
         sliderHealth.value = currentHealth;
 
         if(currentHealth <= 0)
-        {            
+        {
+            Instantiate(coins, gameObject.transform.position, gameObject.transform.rotation);
             Destroy(gameObject);
         }
     }

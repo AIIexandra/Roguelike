@@ -40,6 +40,16 @@ public class ExplodeBadGuy : MonoBehaviour
                 character.DamagePlayer((1 / badGuy.distance) * damage);
                 Instantiate(explosionEffect, explosionSpawn.position, Quaternion.identity);
                 Destroy(gameObject);
+
+                GameObject player = GameObject.Find("Player");
+                ShotPlayer count = player.GetComponent<ShotPlayer>();
+                count.countKill++;
+
+                if (count.countKill == 4)
+                {
+                    count.countKill = 0;
+                    count.room.isClean = true;
+                }
             }            
         }
     }

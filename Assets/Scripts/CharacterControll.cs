@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterControll : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class CharacterControll : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        PlayerPrefs.SetInt("coins", 0);
 
         healthBar.maxValue = currentHealthPlayer;
     }
@@ -48,7 +50,7 @@ public class CharacterControll : MonoBehaviour
 
         if (currentHealthPlayer <= 0)
         {
-            //Destroy(gameObject);
+            SceneManager.LoadSceneAsync(4);
         }
     }
 }
