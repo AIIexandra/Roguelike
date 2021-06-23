@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RoomGeneration : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class RoomGeneration : MonoBehaviour
         for (int i = 0; i < 9; i++)
             GenerationOneRoom();
         GenerationEndRoom();
+        NavMeshBaker();
     }
 
     void GenerationOneRoom()
@@ -81,5 +83,18 @@ public class RoomGeneration : MonoBehaviour
         newRoom.name = numberRoom.ToString();
 
         spawnedRooms[position.x, position.y] = newRoom;
+    }
+
+
+    void NavMeshBaker()
+    {
+        GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
+        NavMeshSurface[] navMeshSurfaces = new NavMeshSurface[rooms.Length];
+
+        for (int i = 0; i < rooms.Length; i++)
+        {
+            navMeshSurfaces[i] = rooms[i].GetComponent<NavMeshSurface>();
+            navMeshSurfaces[i].BuildNavMesh();
+        }
     }
 }

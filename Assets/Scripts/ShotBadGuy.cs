@@ -26,6 +26,7 @@ public class ShotBadGuy : MonoBehaviour
     {
         if (Time.time > nextFire)
         {
+            fireRate = Random.Range(2, 4);
             nextFire = Time.time + fireRate;
             StartCoroutine(ShotEffect());
 
